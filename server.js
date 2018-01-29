@@ -15,6 +15,12 @@ app.get('/v1/notes', (req, res) => {
   res.json(data);
 });
 
+app.get('/v1/notes:id', (req, res) => {
+  const id = parseInt(req.params.id);
+  const note = data.find(note => note.id === id);
+  res.json(note);
+})
+
 app.listen(8080, function () {
   console.info(`Server listening on ${this.address().port}`);
 }).on('error', err => {
