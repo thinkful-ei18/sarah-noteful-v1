@@ -12,10 +12,13 @@ console.log('hello world!');
 // INSERT EXPRESS APP CODE HERE...
 
 app.get('/v1/notes', (req, res) => {
-  res.json(data);
+  const {searchTerm} =req.query;
+  let searchNotes = searchTerm ? data.filter(note => note.title.includes(searchTerm)) : data;
+
+  res.json(searchNotes);
 });
 
-app.get('/v1/notes:id', (req, res) => {
+app.get('/v1/notes/:id', (req, res) => {
   const id = parseInt(req.params.id);
   const note = data.find(note => note.id === id);
   res.json(note);
